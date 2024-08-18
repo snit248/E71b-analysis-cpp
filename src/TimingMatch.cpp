@@ -33,7 +33,7 @@ int main(int argc, char *argv[]){
     Float_t trk_pe[trk_channels];
 
     Int_t bm_unixtime;
-    vector<Double_t> bm_lg;
+    vector<double> bm_lg;
 
     //トラッカーとBMファイルの読み込み
     string input_tracker_file = argv[1];
@@ -51,8 +51,8 @@ int main(int argc, char *argv[]){
     tracker_tree->SetBranchAddress("UNIXTIME", trk_unixtime);
     tracker_tree->SetBranchAddress("PE", trk_pe);
 
-    BabyMIND_tree->SetBranchAddress("UNIXTIME", &bm_unixtime);
-    BabyMIND_tree->SetBranchAddress("LG", bm_lg.data());
+    BabyMIND_tree->SetBranchAddress("unixtime", &bm_unixtime);
+    BabyMIND_tree->SetBranchAddress("LG", &bm_lg);
 
     //ここから具体的な処理
     BabyMIND_tree->GetEntry(0);
@@ -75,6 +75,8 @@ int main(int argc, char *argv[]){
         }
         else if(trk_unixtime[0]==end_unixtime){
             end_trk_entry = i;
+            //終了時間を見つけたらループを抜ける
+            break;
         }
     }
 
