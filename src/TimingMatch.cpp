@@ -15,6 +15,8 @@
 #include <TF1.h>
 #include <TString.h>
 #include <TCanvas.h>
+#include <TFile.h>
+#include <TTree.h>
 
 using namespace std;
 
@@ -41,30 +43,30 @@ int main(int argc, char *argv[]){
     TFile *tracker_file = new TFile(input_tracker_file.c_str());
     TFile *BabyMIND_file = new TFile(input_BabyMIND_file.c_str());
 
-    TTree* tracker_tree = (TTree*)trcker_file->Get("tree");
+    TTree* tracker_tree = (TTree*)tracker_file->Get("tree");
     TTree* BabyMIND_tree = (TTree*)BabyMIND_file->Get("tree");
 
     TString output_file_name = output_file;
 
-    tracker_file->SetBranchAdress("UNIXTIME", trk_unixtime);
-    tracker_file->SetBranchAdress("PE", trk_pe);
+    tracker_tree->SetBranchAddress("UNIXTIME", trk_unixtime);
+    tracker_tree->SetBranchAddress("PE", trk_pe);
 
-    BabyMIND_file->SetBranchAdress("UNIXTIME", &bm_unixtime);
-    BabyMIND_file->SetBranchAdress("LG", bm_lg.data());
+    BabyMIND_tree->SetBranchAddress("UNIXTIME", &bm_unixtime);
+    BabyMIND_tree->SetBranchAddress("LG", bm_lg.data());
 
     //ここから具体的な処理
-    BabyMIND_file->GetEntry(0);
+    BabyMIND_tree->GetEntry(0);
     Int_t start_unixtime = bm_unixtime;
 
-    BabyMIND_file->GetEntry(-1);
+    BabyMIND_tree->GetEntry(-1);
     Int_t end_unixtime = bm_unixtime;
 
     //BMの開始時間と終了時間のトラッカーのエントリー番号を取得
     Int_t start_trk_entry;
     Int_t end_trk_entry;
 
-    for(i=0:i<tracker_file->GetEntries();i++){
-        tracker_file->GetEntry(i);
+    for(Int_t i=0;i<tracker_tree->GetEntries();i++){
+        tracker_tree->GetEntry(i);
         if(trk_unixtime[0] < start_unixtime || trk_unixtime[0] > end_unixtime){
             continue;
         }
@@ -80,11 +82,11 @@ int main(int argc, char *argv[]){
     Int_t match_counter = 0;
 
     //時間差-5から5の間でトラッカーとBMの一致を探す
-    for(Int_t i=-5:i<=5:i++){
+    for(Int_t i=-5;i<=5;i++){
         output_file_name_dif = output_file_name + "_" + i + ".txt";
         ofstream output_file_dif(output_file_name_dif);
-        for(Int_t j=start_trk_entry:j<=end_trk_entry:j++){
-            tracker_file->GetEntry(j);
+        for(Int_t j=start_trk_entry;j<=end_trk_entry;j++){
+            tracker_tree->GetEntry(j);
             
         }
     }
