@@ -924,6 +924,8 @@ src/CMakeFiles/TimingMatch.dir/TimingMatch.cpp.o
  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/stdarg.h
  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/stddef.h
  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/stdint.h
+ /Users/shunito/Scinti/E71b-analysis-cpp/lib/BMHitSearch.h
+ /Users/shunito/Scinti/E71b-analysis-cpp/lib/STHitSearch.h
  /opt/homebrew/Cellar/boost/1.85.0/include/boost/assert.hpp
  /opt/homebrew/Cellar/boost/1.85.0/include/boost/assert/source_location.hpp
  /opt/homebrew/Cellar/boost/1.85.0/include/boost/blank.hpp

@@ -14,6 +14,9 @@
 # EXTERNAL cache entries
 ########################
 
+//Dependencies for the target
+BMHitSearchLib_LIB_DEPENDS:STATIC=general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libCore.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libImt.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libRIO.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libNet.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libHist.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libGraf.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libGraf3d.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libGpad.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libROOTDataFrame.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libTree.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libTreePlayer.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libRint.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libPostscript.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libMatrix.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libPhysics.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libMathCore.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libThread.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libMultiProc.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libROOTVecOps.so;
+
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=CMAKE_ADDR2LINE-NOTFOUND
 
@@ -318,6 +321,9 @@ ROOT_rootmv_CMD:FILEPATH=/opt/homebrew/bin/rootmv
 //Path to a program.
 ROOT_rootrm_CMD:FILEPATH=/opt/homebrew/bin/rootrm
 
+//Dependencies for the target
+STHitSearchLib_LIB_DEPENDS:STATIC=general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libCore.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libImt.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libRIO.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libNet.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libHist.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libGraf.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libGraf3d.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libGpad.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libROOTDataFrame.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libTree.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libTreePlayer.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libRint.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libPostscript.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libMatrix.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libPhysics.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libMathCore.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libThread.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libMultiProc.so;general;/opt/homebrew/Cellar/root/6.32.02/lib/root/libROOTVecOps.so;
+
 //Value Computed by CMake
 TimingMatch_BINARY_DIR:STATIC=/Users/shunito/Scinti/E71b-analysis-cpp/build
 
@@ -425,7 +431,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=2
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=3
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
