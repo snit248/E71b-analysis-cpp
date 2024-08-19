@@ -177,6 +177,32 @@ TimingMatch/fast:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/TimingMatch.dir/build.make src/CMakeFiles/TimingMatch.dir/build
 .PHONY : TimingMatch/fast
 
+#=============================================================================
+# Target rules for targets named BMHitSearchLib
+
+# Build rule for target.
+BMHitSearchLib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BMHitSearchLib
+.PHONY : BMHitSearchLib
+
+# fast build rule for target.
+BMHitSearchLib/fast:
+	$(MAKE) $(MAKESILENT) -f lib/CMakeFiles/BMHitSearchLib.dir/build.make lib/CMakeFiles/BMHitSearchLib.dir/build
+.PHONY : BMHitSearchLib/fast
+
+#=============================================================================
+# Target rules for targets named STHitSearchLib
+
+# Build rule for target.
+STHitSearchLib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 STHitSearchLib
+.PHONY : STHitSearchLib
+
+# fast build rule for target.
+STHitSearchLib/fast:
+	$(MAKE) $(MAKESILENT) -f lib/CMakeFiles/STHitSearchLib.dir/build.make lib/CMakeFiles/STHitSearchLib.dir/build
+.PHONY : STHitSearchLib/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -189,6 +215,8 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... BMHitSearchLib"
+	@echo "... STHitSearchLib"
 	@echo "... TimingMatch"
 .PHONY : help
 

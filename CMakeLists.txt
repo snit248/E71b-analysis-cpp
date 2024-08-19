@@ -79,3 +79,4 @@ endif ()
 
 # サブディレクトリの追加
 add_subdirectory(src)
+add_subdirectory(lib)

@@ -4,7 +4,7 @@
 # compile CXX with /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
 CXX_DEFINES = -DVERSION=0.0.1
 
-CXX_INCLUDES = -I/usr/local/include -I/opt/homebrew/Cellar/root/6.32.02/include/root
+CXX_INCLUDES = -I/usr/local/include -I/opt/homebrew/Cellar/root/6.32.02/include/root -I/Users/shunito/Scinti/E71b-analysis-cpp/lib
 
 CXX_FLAGSarm64 =   -m64 -pipe -fsigned-char -fno-common -Qunused-arguments -pthread -stdlib=libc++ -Wall -pedantic -Wno-overloaded-virtual -Wno-shadow -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk
 
