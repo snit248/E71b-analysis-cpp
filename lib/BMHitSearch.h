@@ -15,13 +15,13 @@
 
 class BMHitSearch{
     public:
-        BMHitSearch(std::vector<double> bm_pe);
+        BMHitSearch(std::vector<double> bm_lhg);
         ~BMHitSearch();
         void findHits();
         Int_t HitNum;
         Bool_t isHit;
 
     private:
-        std::vector<double> pe;
+        std::vector<double> lhg;
 };
 #endif
