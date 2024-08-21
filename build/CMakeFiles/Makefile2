@@ -68,16 +68,19 @@ CMAKE_BINARY_DIR = /Users/shunito/Scinti/E71b-analysis-cpp/build
 # The main recursive "all" target.
 all: src/all
 all: lib/all
+all: test/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
 preinstall: src/preinstall
 preinstall: lib/preinstall
+preinstall: test/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: src/clean
 clean: lib/clean
+clean: test/clean
 .PHONY : clean
 
 #=============================================================================
@@ -113,6 +116,21 @@ src/clean: src/CMakeFiles/TimingMatch.dir/clean
 .PHONY : src/clean
 
 #=============================================================================
+# Directory level rules for directory test
+
+# Recursive "all" directory target.
+test/all: test/CMakeFiles/BMBranchReader.dir/all
+.PHONY : test/all
+
+# Recursive "preinstall" directory target.
+test/preinstall:
+.PHONY : test/preinstall
+
+# Recursive "clean" directory target.
+test/clean: test/CMakeFiles/BMBranchReader.dir/clean
+.PHONY : test/clean
+
+#=============================================================================
 # Target rules for target src/CMakeFiles/TimingMatch.dir
 
 # All Build rule for target.
@@ -120,7 +138,7 @@ src/CMakeFiles/TimingMatch.dir/all: lib/CMakeFiles/BMHitSearchLib.dir/all
 src/CMakeFiles/TimingMatch.dir/all: lib/CMakeFiles/STHitSearchLib.dir/all
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/TimingMatch.dir/build.make src/CMakeFiles/TimingMatch.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/TimingMatch.dir/build.make src/CMakeFiles/TimingMatch.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/shunito/Scinti/E71b-analysis-cpp/build/CMakeFiles --progress-num=5,6 "Built target TimingMatch"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/shunito/Scinti/E71b-analysis-cpp/build/CMakeFiles --progress-num=7,8 "Built target TimingMatch"
 .PHONY : src/CMakeFiles/TimingMatch.dir/all
 
 # Build rule for subdir invocation for target.
@@ -146,7 +164,7 @@ src/CMakeFiles/TimingMatch.dir/clean:
 lib/CMakeFiles/BMHitSearchLib.dir/all:
 	$(MAKE) $(MAKESILENT) -f lib/CMakeFiles/BMHitSearchLib.dir/build.make lib/CMakeFiles/BMHitSearchLib.dir/depend
 	$(MAKE) $(MAKESILENT) -f lib/CMakeFiles/BMHitSearchLib.dir/build.make lib/CMakeFiles/BMHitSearchLib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/shunito/Scinti/E71b-analysis-cpp/build/CMakeFiles --progress-num=1,2 "Built target BMHitSearchLib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/shunito/Scinti/E71b-analysis-cpp/build/CMakeFiles --progress-num=3,4 "Built target BMHitSearchLib"
 .PHONY : lib/CMakeFiles/BMHitSearchLib.dir/all
 
 # Build rule for subdir invocation for target.
@@ -172,7 +190,7 @@ lib/CMakeFiles/BMHitSearchLib.dir/clean:
 lib/CMakeFiles/STHitSearchLib.dir/all:
 	$(MAKE) $(MAKESILENT) -f lib/CMakeFiles/STHitSearchLib.dir/build.make lib/CMakeFiles/STHitSearchLib.dir/depend
 	$(MAKE) $(MAKESILENT) -f lib/CMakeFiles/STHitSearchLib.dir/build.make lib/CMakeFiles/STHitSearchLib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/shunito/Scinti/E71b-analysis-cpp/build/CMakeFiles --progress-num=3,4 "Built target STHitSearchLib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/shunito/Scinti/E71b-analysis-cpp/build/CMakeFiles --progress-num=5,6 "Built target STHitSearchLib"
 .PHONY : lib/CMakeFiles/STHitSearchLib.dir/all
 
 # Build rule for subdir invocation for target.
@@ -190,6 +208,33 @@ STHitSearchLib: lib/CMakeFiles/STHitSearchLib.dir/rule
 lib/CMakeFiles/STHitSearchLib.dir/clean:
 	$(MAKE) $(MAKESILENT) -f lib/CMakeFiles/STHitSearchLib.dir/build.make lib/CMakeFiles/STHitSearchLib.dir/clean
 .PHONY : lib/CMakeFiles/STHitSearchLib.dir/clean
+
+#=============================================================================
+# Target rules for target test/CMakeFiles/BMBranchReader.dir
+
+# All Build rule for target.
+test/CMakeFiles/BMBranchReader.dir/all: lib/CMakeFiles/BMHitSearchLib.dir/all
+test/CMakeFiles/BMBranchReader.dir/all: lib/CMakeFiles/STHitSearchLib.dir/all
+	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/BMBranchReader.dir/build.make test/CMakeFiles/BMBranchReader.dir/depend
+	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/BMBranchReader.dir/build.make test/CMakeFiles/BMBranchReader.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/shunito/Scinti/E71b-analysis-cpp/build/CMakeFiles --progress-num=1,2 "Built target BMBranchReader"
+.PHONY : test/CMakeFiles/BMBranchReader.dir/all
+
+# Build rule for subdir invocation for target.
+test/CMakeFiles/BMBranchReader.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/shunito/Scinti/E71b-analysis-cpp/build/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/BMBranchReader.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/shunito/Scinti/E71b-analysis-cpp/build/CMakeFiles 0
+.PHONY : test/CMakeFiles/BMBranchReader.dir/rule
+
+# Convenience name for target.
+BMBranchReader: test/CMakeFiles/BMBranchReader.dir/rule
+.PHONY : BMBranchReader
+
+# clean rule for target.
+test/CMakeFiles/BMBranchReader.dir/clean:
+	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/BMBranchReader.dir/build.make test/CMakeFiles/BMBranchReader.dir/clean
+.PHONY : test/CMakeFiles/BMBranchReader.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

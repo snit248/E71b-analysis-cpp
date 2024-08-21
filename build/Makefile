@@ -203,6 +203,19 @@ STHitSearchLib/fast:
 	$(MAKE) $(MAKESILENT) -f lib/CMakeFiles/STHitSearchLib.dir/build.make lib/CMakeFiles/STHitSearchLib.dir/build
 .PHONY : STHitSearchLib/fast
 
+#=============================================================================
+# Target rules for targets named BMBranchReader
+
+# Build rule for target.
+BMBranchReader: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BMBranchReader
+.PHONY : BMBranchReader
+
+# fast build rule for target.
+BMBranchReader/fast:
+	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/BMBranchReader.dir/build.make test/CMakeFiles/BMBranchReader.dir/build
+.PHONY : BMBranchReader/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -215,6 +228,7 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... BMBranchReader"
 	@echo "... BMHitSearchLib"
 	@echo "... STHitSearchLib"
 	@echo "... TimingMatch"
