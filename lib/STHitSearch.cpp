@@ -23,7 +23,7 @@ void STHitSearch::findHits(){
         }
     }
 
-    //HitNumが3以上ならtrue、そうでなければfalseを返す
+    //HitNumが4以上ならtrue、そうでなければfalseを返す
     if(HitNum > 3){
         isHit = true;
     }

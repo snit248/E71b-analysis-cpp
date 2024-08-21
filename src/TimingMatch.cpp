@@ -38,7 +38,8 @@ int main(int argc, char *argv[]){
     Float_t trk_pe[trk_channels];
 
     Int_t bm_unixtime;
-    vector<double> bm_lg;
+    vector<double> *bm_lhg = 0;
+    TBranch *bm_lhg_branch = 0;
 
     //トラッカーとBMファイルの読み込み
     string input_tracker_file = argv[1];
@@ -57,7 +58,7 @@ int main(int argc, char *argv[]){
     tracker_tree->SetBranchAddress("PE", trk_pe);
 
     BabyMIND_tree->SetBranchAddress("unixtime", &bm_unixtime);
-    BabyMIND_tree->SetBranchAddress("LG", &bm_lg);
+    BabyMIND_tree->SetBranchAddress("LHG", &bm_lhg, &bm_lhg_branch);
 
     ///ここから具体的な処理///
     
@@ -67,7 +68,7 @@ int main(int argc, char *argv[]){
     BabyMIND_tree->GetEntry(1);
     Int_t start_unixtime = bm_unixtime;
     cout << "start_unixtime: " << start_unixtime << endl;
-    cout << "bm_lg->size(): " << bm_lg.size() << endl; //ここでセグフォ
+    cout << "bm_lhg->size(): " << bm_lhg->size() << endl; //*だとここでセグフォ
 
     BabyMIND_tree->GetEntry(nEntriesBM-2);
     Int_t end_unixtime = bm_unixtime;
@@ -109,12 +110,12 @@ int main(int argc, char *argv[]){
             //2番目のデータなので+1
             BabyMIND_tree->GetEntry(j-start_trk_entry+1);
             // ベクトルの各要素をループで出力
-            if (!bm_lg.size() != 0) {
-                for (size_t i = 0; i < bm_lg.size(); ++i) {
-                    std::cout << "bm_lg[" << i << "] = " << bm_lg[i] << std::endl;
+            if (bm_lhg->size() != 0) {
+                for (size_t i = 0; i < bm_lhg->size(); ++i) {
+                    std::cout << "bm_lhg[" << i << "] = " << (*bm_lhg)[i] << std::endl;
                 }
             } else {
-                std::cerr << "Error: bm_lg is nullptr or empty." << std::endl;
+                std::cerr << "Error: bm_lhg is nullptr or empty." << std::endl;
             }
 
             STHitSearch HitSearchST(trk_channels, trk_pe);
@@ -122,7 +123,7 @@ int main(int argc, char *argv[]){
             //cout << "ST HitNum: " << HitSearchST.HitNum << endl;
             //cout << "ST isHit: " << HitSearchST.isHit << endl;
 
-            BMHitSearch HitSearchBM(bm_lg);
+            BMHitSearch HitSearchBM(*bm_lhg);
             HitSearchBM.findHits();
             //cout << "BM HitNum: " << HitSearchBM.HitNum << endl;
             //cout << "BM isHit: " << HitSearchBM.isHit << endl;

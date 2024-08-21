@@ -1,0 +1,30 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/shunito/Scinti/E71b-analysis-cpp/lib/src/../library/libBMBeaminfo.so'
+relocations:
+  - { offsetInCU: 0x49, offset: 0x49, size: 0x8, addend: 0x0, symName: __ZN4ROOT8InternalL13gVersionCheckE, symObjAddr: 0x76FB8, symBinAddr: 0x8028, symSize: 0x0 }
+  - { offsetInCU: 0xB1B, offset: 0xB1B, size: 0x8, addend: 0x0, symName: __ZN4ROOTL25GenerateInitInstanceLocalEPK10BMBeaminfo, symObjAddr: 0x1C, symBinAddr: 0x35E4, symSize: 0x198 }
+  - { offsetInCU: 0xB45, offset: 0xB45, size: 0x8, addend: 0x0, symName: __ZZN4ROOTL25GenerateInitInstanceLocalEPK10BMBeaminfoE9isa_proxy, symObjAddr: 0x76FC0, symBinAddr: 0x8030, symSize: 0x0 }
+  - { offsetInCU: 0xB5A, offset: 0xB5A, size: 0x8, addend: 0x0, symName: __ZZN4ROOTL25GenerateInitInstanceLocalEPK10BMBeaminfoE8instance, symObjAddr: 0x76FD0, symBinAddr: 0x8040, symSize: 0x0 }
+  - { offsetInCU: 0xB8F, offset: 0xB8F, size: 0x8, addend: 0x0, symName: __ZN4ROOTL19destruct_BMBeaminfoEPv, symObjAddr: 0x4D0, symBinAddr: 0x3A98, symSize: 0x4 }
+  - { offsetInCU: 0xBC9, offset: 0xBC9, size: 0x8, addend: 0x0, symName: __ZN4ROOT20GenerateInitInstanceEPK10BMBeaminfo, symObjAddr: 0x0, symBinAddr: 0x35C8, symSize: 0x1C }
+  - { offsetInCU: 0xBFF, offset: 0xBFF, size: 0x8, addend: 0x0, symName: __ZN4ROOTL21BMBeaminfo_DictionaryEv, symObjAddr: 0x2F8, symBinAddr: 0x38C0, symSize: 0x1C }
+  - { offsetInCU: 0xC35, offset: 0xC35, size: 0x8, addend: 0x0, symName: __ZN4ROOTL14new_BMBeaminfoEPv, symObjAddr: 0x314, symBinAddr: 0x38DC, symSize: 0x50 }
+  - { offsetInCU: 0xC62, offset: 0xC62, size: 0x8, addend: 0x0, symName: __ZN4ROOTL19newArray_BMBeaminfoElPv, symObjAddr: 0x364, symBinAddr: 0x392C, symSize: 0x100 }
+  - { offsetInCU: 0xC9E, offset: 0xC9E, size: 0x8, addend: 0x0, symName: __ZN4ROOTL17delete_BMBeaminfoEPv, symObjAddr: 0x464, symBinAddr: 0x3A2C, symSize: 0x1C }
+  - { offsetInCU: 0xCC5, offset: 0xCC5, size: 0x8, addend: 0x0, symName: __ZN4ROOTL22deleteArray_BMBeaminfoEPv, symObjAddr: 0x480, symBinAddr: 0x3A48, symSize: 0x50 }
+  - { offsetInCU: 0x2237D, offset: 0x2237D, size: 0x8, addend: 0x0, symName: __ZN12_GLOBAL__N_151TriggerDictionaryInitialization_BMBeaminfoDict_ImplEv, symObjAddr: 0x1B8, symBinAddr: 0x3780, symSize: 0x140 }
+  - { offsetInCU: 0x223A2, offset: 0x223A2, size: 0x8, addend: 0x0, symName: __ZZN12_GLOBAL__N_151TriggerDictionaryInitialization_BMBeaminfoDict_ImplEvE7headers, symObjAddr: 0x878, symBinAddr: 0x8000, symSize: 0x0 }
+  - { offsetInCU: 0x223B7, offset: 0x223B7, size: 0x8, addend: 0x0, symName: __ZZN12_GLOBAL__N_151TriggerDictionaryInitialization_BMBeaminfoDict_ImplEvE12includePaths, symObjAddr: 0x888, symBinAddr: 0x8010, symSize: 0x0 }
+  - { offsetInCU: 0x223E4, offset: 0x223E4, size: 0x8, addend: 0x0, symName: __ZZN12_GLOBAL__N_151TriggerDictionaryInitialization_BMBeaminfoDict_ImplEvE14classesHeaders, symObjAddr: 0x770F0, symBinAddr: 0x8160, symSize: 0x0 }
+  - { offsetInCU: 0x223F9, offset: 0x223F9, size: 0x8, addend: 0x0, symName: __ZZN12_GLOBAL__N_151TriggerDictionaryInitialization_BMBeaminfoDict_ImplEvE13isInitialized, symObjAddr: 0x77118, symBinAddr: 0x8188, symSize: 0x0 }
+  - { offsetInCU: 0x24A76, offset: 0x24A76, size: 0x8, addend: 0x0, symName: __Z46TriggerDictionaryInitialization_BMBeaminfoDictv, symObjAddr: 0x1B4, symBinAddr: 0x377C, symSize: 0x4 }
+  - { offsetInCU: 0x24A94, offset: 0x24A94, size: 0x8, addend: 0x0, symName: __Z46TriggerDictionaryInitialization_BMBeaminfoDictv, symObjAddr: 0x1B4, symBinAddr: 0x377C, symSize: 0x4 }
+  - { offsetInCU: 0x24D12, offset: 0x24D12, size: 0x8, addend: 0x0, symName: __ZNSt3__16vectorINS_4pairINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiEENS5_IS8_EEED1B8ue170006Ev, symObjAddr: 0x4D4, symBinAddr: 0x3A9C, symSize: 0x74 }
+  - { offsetInCU: 0x26, offset: 0x25053, size: 0x8, addend: 0x0, symName: __ZN10BMBeaminfoC2Ev, symObjAddr: 0x0, symBinAddr: 0x3B38, symSize: 0xC }
+  - { offsetInCU: 0x2A62, offset: 0x27A8F, size: 0x8, addend: 0x0, symName: __ZN10BMBeaminfoC2Ev, symObjAddr: 0x0, symBinAddr: 0x3B38, symSize: 0xC }
+  - { offsetInCU: 0x2AA4, offset: 0x27AD1, size: 0x8, addend: 0x0, symName: __ZN10BMBeaminfoC1Ev, symObjAddr: 0xC, symBinAddr: 0x3B44, symSize: 0xC }
+  - { offsetInCU: 0x2AD2, offset: 0x27AFF, size: 0x8, addend: 0x0, symName: __ZN10BMBeaminfoC1Ev, symObjAddr: 0xC, symBinAddr: 0x3B44, symSize: 0xC }
+  - { offsetInCU: 0x2AED, offset: 0x27B1A, size: 0x8, addend: 0x0, symName: __ZN10BMBeaminfoD2Ev, symObjAddr: 0x18, symBinAddr: 0x3B50, symSize: 0x4 }
+  - { offsetInCU: 0x2B18, offset: 0x27B45, size: 0x8, addend: 0x0, symName: __ZN10BMBeaminfoD1Ev, symObjAddr: 0x1C, symBinAddr: 0x3B54, symSize: 0x4 }
+...

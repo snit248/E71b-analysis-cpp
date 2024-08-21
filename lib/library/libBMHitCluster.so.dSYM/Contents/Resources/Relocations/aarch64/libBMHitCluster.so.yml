@@ -1,0 +1,31 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/shunito/Scinti/E71b-analysis-cpp/lib/src/../library/libBMHitCluster.so'
+relocations:
+  - { offsetInCU: 0x49, offset: 0x49, size: 0x8, addend: 0x0, symName: __ZN4ROOT8InternalL13gVersionCheckE, symObjAddr: 0x77078, symBinAddr: 0x8028, symSize: 0x0 }
+  - { offsetInCU: 0xB1B, offset: 0xB1B, size: 0x8, addend: 0x0, symName: __ZN4ROOTL25GenerateInitInstanceLocalEPK12BMHitCluster, symObjAddr: 0x1C, symBinAddr: 0x3594, symSize: 0x198 }
+  - { offsetInCU: 0xB45, offset: 0xB45, size: 0x8, addend: 0x0, symName: __ZZN4ROOTL25GenerateInitInstanceLocalEPK12BMHitClusterE9isa_proxy, symObjAddr: 0x77080, symBinAddr: 0x8030, symSize: 0x0 }
+  - { offsetInCU: 0xB5A, offset: 0xB5A, size: 0x8, addend: 0x0, symName: __ZZN4ROOTL25GenerateInitInstanceLocalEPK12BMHitClusterE8instance, symObjAddr: 0x77090, symBinAddr: 0x8040, symSize: 0x0 }
+  - { offsetInCU: 0xB8F, offset: 0xB8F, size: 0x8, addend: 0x0, symName: __ZN4ROOTL21destruct_BMHitClusterEPv, symObjAddr: 0x4DC, symBinAddr: 0x3A54, symSize: 0x4 }
+  - { offsetInCU: 0xBC9, offset: 0xBC9, size: 0x8, addend: 0x0, symName: __ZN4ROOT20GenerateInitInstanceEPK12BMHitCluster, symObjAddr: 0x0, symBinAddr: 0x3578, symSize: 0x1C }
+  - { offsetInCU: 0xBFF, offset: 0xBFF, size: 0x8, addend: 0x0, symName: __ZN4ROOTL23BMHitCluster_DictionaryEv, symObjAddr: 0x2F8, symBinAddr: 0x3870, symSize: 0x1C }
+  - { offsetInCU: 0xC35, offset: 0xC35, size: 0x8, addend: 0x0, symName: __ZN4ROOTL16new_BMHitClusterEPv, symObjAddr: 0x314, symBinAddr: 0x388C, symSize: 0x50 }
+  - { offsetInCU: 0xC62, offset: 0xC62, size: 0x8, addend: 0x0, symName: __ZN4ROOTL21newArray_BMHitClusterElPv, symObjAddr: 0x364, symBinAddr: 0x38DC, symSize: 0x108 }
+  - { offsetInCU: 0xC9E, offset: 0xC9E, size: 0x8, addend: 0x0, symName: __ZN4ROOTL19delete_BMHitClusterEPv, symObjAddr: 0x46C, symBinAddr: 0x39E4, symSize: 0x1C }
+  - { offsetInCU: 0xCC5, offset: 0xCC5, size: 0x8, addend: 0x0, symName: __ZN4ROOTL24deleteArray_BMHitClusterEPv, symObjAddr: 0x488, symBinAddr: 0x3A00, symSize: 0x54 }
+  - { offsetInCU: 0x2237D, offset: 0x2237D, size: 0x8, addend: 0x0, symName: __ZN12_GLOBAL__N_153TriggerDictionaryInitialization_BMHitClusterDict_ImplEv, symObjAddr: 0x1B8, symBinAddr: 0x3730, symSize: 0x140 }
+  - { offsetInCU: 0x223A2, offset: 0x223A2, size: 0x8, addend: 0x0, symName: __ZZN12_GLOBAL__N_153TriggerDictionaryInitialization_BMHitClusterDict_ImplEvE7headers, symObjAddr: 0x898, symBinAddr: 0x8000, symSize: 0x0 }
+  - { offsetInCU: 0x223B7, offset: 0x223B7, size: 0x8, addend: 0x0, symName: __ZZN12_GLOBAL__N_153TriggerDictionaryInitialization_BMHitClusterDict_ImplEvE12includePaths, symObjAddr: 0x8A8, symBinAddr: 0x8010, symSize: 0x0 }
+  - { offsetInCU: 0x223E4, offset: 0x223E4, size: 0x8, addend: 0x0, symName: __ZZN12_GLOBAL__N_153TriggerDictionaryInitialization_BMHitClusterDict_ImplEvE14classesHeaders, symObjAddr: 0x771B0, symBinAddr: 0x8160, symSize: 0x0 }
+  - { offsetInCU: 0x223F9, offset: 0x223F9, size: 0x8, addend: 0x0, symName: __ZZN12_GLOBAL__N_153TriggerDictionaryInitialization_BMHitClusterDict_ImplEvE13isInitialized, symObjAddr: 0x771D8, symBinAddr: 0x8188, symSize: 0x0 }
+  - { offsetInCU: 0x24AC9, offset: 0x24AC9, size: 0x8, addend: 0x0, symName: __Z48TriggerDictionaryInitialization_BMHitClusterDictv, symObjAddr: 0x1B4, symBinAddr: 0x372C, symSize: 0x4 }
+  - { offsetInCU: 0x24AE7, offset: 0x24AE7, size: 0x8, addend: 0x0, symName: __Z48TriggerDictionaryInitialization_BMHitClusterDictv, symObjAddr: 0x1B4, symBinAddr: 0x372C, symSize: 0x4 }
+  - { offsetInCU: 0x24D65, offset: 0x24D65, size: 0x8, addend: 0x0, symName: __ZNSt3__16vectorINS_4pairINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiEENS5_IS8_EEED1B8ue170006Ev, symObjAddr: 0x4E0, symBinAddr: 0x3A58, symSize: 0x74 }
+  - { offsetInCU: 0x26, offset: 0x250A6, size: 0x8, addend: 0x0, symName: __ZN12BMHitClusterC2Ev, symObjAddr: 0x0, symBinAddr: 0x3AF4, symSize: 0x18 }
+  - { offsetInCU: 0x2A62, offset: 0x27AE2, size: 0x8, addend: 0x0, symName: __ZN12BMHitClusterC2Ev, symObjAddr: 0x0, symBinAddr: 0x3AF4, symSize: 0x18 }
+  - { offsetInCU: 0x2AA4, offset: 0x27B24, size: 0x8, addend: 0x0, symName: __ZN12BMHitClusterC1Ev, symObjAddr: 0x18, symBinAddr: 0x3B0C, symSize: 0x18 }
+  - { offsetInCU: 0x2AD2, offset: 0x27B52, size: 0x8, addend: 0x0, symName: __ZN12BMHitClusterC1Ev, symObjAddr: 0x18, symBinAddr: 0x3B0C, symSize: 0x18 }
+  - { offsetInCU: 0x2AED, offset: 0x27B6D, size: 0x8, addend: 0x0, symName: __ZN12BMHitClusterD2Ev, symObjAddr: 0x30, symBinAddr: 0x3B24, symSize: 0x4 }
+  - { offsetInCU: 0x2B18, offset: 0x27B98, size: 0x8, addend: 0x0, symName: __ZN12BMHitClusterD1Ev, symObjAddr: 0x34, symBinAddr: 0x3B28, symSize: 0x4 }
+  - { offsetInCU: 0x2B43, offset: 0x27BC3, size: 0x8, addend: 0x0, symName: __ZN12BMHitCluster5ClearEv, symObjAddr: 0x38, symBinAddr: 0x3B2C, symSize: 0x18 }
+...
