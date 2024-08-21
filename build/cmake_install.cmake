@@ -41,6 +41,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/Users/shunito/Scinti/E71b-analysis-cpp/build/src/cmake_install.cmake")
   include("/Users/shunito/Scinti/E71b-analysis-cpp/build/lib/cmake_install.cmake")
+  include("/Users/shunito/Scinti/E71b-analysis-cpp/build/test/cmake_install.cmake")
 
 endif()
 

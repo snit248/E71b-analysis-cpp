@@ -38,16 +38,16 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/{CMAKE_INSTALL_BINDIR}/TimingMatch" TYPE EXECUTABLE FILES "/Users/shunito/Scinti/E71b-analysis-cpp/build/src/TimingMatch")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/{CMAKE_INSTALL_BINDIR}/TimingMatch/TimingMatch" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/{CMAKE_INSTALL_BINDIR}/TimingMatch/TimingMatch")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/Users/shunito/Scinti/E71b-analysis-cpp/build/src/TimingMatch")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/TimingMatch" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/TimingMatch")
     execute_process(COMMAND /usr/bin/install_name_tool
       -delete_rpath "/usr/local/lib"
       -delete_rpath "/opt/homebrew/Cellar/root/6.32.02/lib/root"
       -delete_rpath "/Users/shunito/Scinti/E71b-analysis-cpp/build/lib"
-      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/{CMAKE_INSTALL_BINDIR}/TimingMatch/TimingMatch")
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/TimingMatch")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip" -u -r "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/{CMAKE_INSTALL_BINDIR}/TimingMatch/TimingMatch")
+      execute_process(COMMAND "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip" -u -r "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/TimingMatch")
     endif()
   endif()
 endif()

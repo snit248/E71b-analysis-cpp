@@ -19,6 +19,11 @@
 #include <TFile.h>
 #include <TTree.h>
 
+//BM include
+#include "BMBasicRecon.hpp"
+#include "BMBeaminfo.hpp"
+#include "BMBSD.hpp"
+
 // local include
 #include "STHitSearch.h"
 #include "BMHitSearch.h"
@@ -38,8 +43,11 @@ int main(int argc, char *argv[]){
     Float_t trk_pe[trk_channels];
 
     Int_t bm_unixtime;
-    vector<double> *bm_lhg = 0;
-    TBranch *bm_lhg_branch = 0;
+
+    //BMブランチ（枝）
+    BMBasicRecon *bm_basic_recon = new BMBasicRecon();
+    BMBSD *bm_bsd = new BMBSD();
+    BMBeaminfo *bm_beaminfo = new BMBeaminfo();
 
     //トラッカーとBMファイルの読み込み
     string input_tracker_file = argv[1];
@@ -57,8 +65,9 @@ int main(int argc, char *argv[]){
     tracker_tree->SetBranchAddress("UNIXTIME", trk_unixtime);
     tracker_tree->SetBranchAddress("PE", trk_pe);
 
-    BabyMIND_tree->SetBranchAddress("unixtime", &bm_unixtime);
-    BabyMIND_tree->SetBranchAddress("LHG", &bm_lhg, &bm_lhg_branch);
+    BabyMIND_tree->SetBranchAddress("BMBasicRecon",&bm_basic_recon);
+    BabyMIND_tree->SetBranchAddress("BMBSD",&bm_bsd);
+    BabyMIND_tree->SetBranchAddress("BMBeaminfo",&bm_beaminfo);
 
     ///ここから具体的な処理///
     
@@ -68,7 +77,7 @@ int main(int argc, char *argv[]){
     BabyMIND_tree->GetEntry(1);
     Int_t start_unixtime = bm_unixtime;
     cout << "start_unixtime: " << start_unixtime << endl;
-    cout << "bm_lhg->size(): " << bm_lhg->size() << endl; //*だとここでセグフォ
+    cout << "bm_basic_recon->LHG.size(): " << bm_basic_recon->LHG.size() << endl; //ここでセグフォ
 
     BabyMIND_tree->GetEntry(nEntriesBM-2);
     Int_t end_unixtime = bm_unixtime;
@@ -110,12 +119,12 @@ int main(int argc, char *argv[]){
             //2番目のデータなので+1
             BabyMIND_tree->GetEntry(j-start_trk_entry+1);
             // ベクトルの各要素をループで出力
-            if (bm_lhg->size() != 0) {
-                for (size_t i = 0; i < bm_lhg->size(); ++i) {
-                    std::cout << "bm_lhg[" << i << "] = " << (*bm_lhg)[i] << std::endl;
+            if (!bm_basic_recon->LHG.size() != 0) {
+                for (size_t i = 0; i < bm_basic_recon->LHG.size(); ++i) {
+                    std::cout << "bm_basic_recon->LHG[" << i << "] = " << bm_basic_recon->LHG[i] << std::endl;
                 }
             } else {
-                std::cerr << "Error: bm_lhg is nullptr or empty." << std::endl;
+                std::cerr << "Error: bm_basic_recon->LHG is nullptr or empty." << std::endl;
             }
 
             STHitSearch HitSearchST(trk_channels, trk_pe);
@@ -123,7 +132,7 @@ int main(int argc, char *argv[]){
             //cout << "ST HitNum: " << HitSearchST.HitNum << endl;
             //cout << "ST isHit: " << HitSearchST.isHit << endl;
 
-            BMHitSearch HitSearchBM(*bm_lhg);
+            BMHitSearch HitSearchBM(bm_basic_recon->LHG);
             HitSearchBM.findHits();
             //cout << "BM HitNum: " << HitSearchBM.HitNum << endl;
             //cout << "BM isHit: " << HitSearchBM.isHit << endl;
