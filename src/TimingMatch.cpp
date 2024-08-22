@@ -75,12 +75,12 @@ int main(int argc, char *argv[]){
     //最初と最後が-1なので、２番と最後から２番目のエントリーを取得
     Int_t nEntriesBM = BabyMIND_tree->GetEntries();
     BabyMIND_tree->GetEntry(1);
-    Int_t start_unixtime = bm_unixtime;
+    Int_t start_unixtime = bm_bsd->unixtime;
     cout << "start_unixtime: " << start_unixtime << endl;
     cout << "bm_basic_recon->LHG.size(): " << bm_basic_recon->LHG.size() << endl; //ここでセグフォ
 
     BabyMIND_tree->GetEntry(nEntriesBM-2);
-    Int_t end_unixtime = bm_unixtime;
+    Int_t end_unixtime = bm_bsd->unixtime;
     cout << "end_unixtime: " << end_unixtime << endl;
 
     //BMの開始時間と終了時間のトラッカーのエントリー番号を取得
@@ -112,38 +112,43 @@ int main(int argc, char *argv[]){
     for(Int_t i=-5;i<=5;i++){
         output_file_name_dif = output_file_name + "_" + i + ".txt";
         ofstream output_file_dif(output_file_name_dif);
+
         //BMの時間内でトラッカーのエントリーを探す
         for(Int_t j=start_trk_entry;j<=end_trk_entry;j++){
             //エントリーの読み込み
             tracker_tree->GetEntry(j);
             //2番目のデータなので+1
             BabyMIND_tree->GetEntry(j-start_trk_entry+1);
-            // ベクトルの各要素をループで出力
-            if (!bm_basic_recon->LHG.size() != 0) {
-                for (size_t i = 0; i < bm_basic_recon->LHG.size(); ++i) {
-                    std::cout << "bm_basic_recon->LHG[" << i << "] = " << bm_basic_recon->LHG[i] << std::endl;
+            bm_unixtime = bm_bsd->unixtime;
+
+            // ベクトルの各要素を出力 デバッグ
+            /*
+            if (bm_basic_recon->LHG.size() != 0) {
+                for (Int_t k = 0; k < bm_basic_recon->LHG.size(); k++) {
+                    std::cout << "bm_basic_recon->LHG[" << k << "] = " << bm_basic_recon->LHG[k] << std::endl;
                 }
             } else {
                 std::cerr << "Error: bm_basic_recon->LHG is nullptr or empty." << std::endl;
             }
+            */
 
             STHitSearch HitSearchST(trk_channels, trk_pe);
             HitSearchST.findHits();
-            //cout << "ST HitNum: " << HitSearchST.HitNum << endl;
-            //cout << "ST isHit: " << HitSearchST.isHit << endl;
+            cout << "ST HitNum: " << HitSearchST.HitNum << endl;
+            cout << "ST isHit: " << HitSearchST.isHit << endl;
 
             BMHitSearch HitSearchBM(bm_basic_recon->LHG);
             HitSearchBM.findHits();
-            //cout << "BM HitNum: " << HitSearchBM.HitNum << endl;
-            //cout << "BM isHit: " << HitSearchBM.isHit << endl;
+            cout << "BM HitNum: " << HitSearchBM.HitNum << endl;
+            cout << "BM isHit: " << HitSearchBM.isHit << endl;
 
-            if(HitSearchST.isHit && HitSearchBM.isHit/* && trk_unixtime[0]==bm_unixtime+i*/){
+            if(HitSearchST.isHit && HitSearchBM.isHit){
                 match_counter++;
                 cout << "Match found! " << "trk_unixtime: " << trk_unixtime[0] << " bm_unixtime: " << bm_unixtime << " " << endl;
                 output_file_dif << match_counter << " " << trk_unixtime[0] << " " << j << " " << HitSearchST.HitNum << " " << j-start_trk_entry+i << " " << HitSearchBM.HitNum << endl;
             }
 
-            if(abs(trk_unixtime[0] - bm_unixtime-i) > 7){
+            if(abs(trk_unixtime[0] - bm_unixtime-i) > 4){
                 cout << "Error: Unixtime is different. tracker: " << trk_unixtime[0] << " BabyMIND: " << bm_unixtime << " " << endl;
                 break;
             }

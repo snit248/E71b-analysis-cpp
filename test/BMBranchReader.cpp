@@ -61,4 +61,16 @@ int main(int argc, char *argv[]){
     cout << "bm_basic_recon->LG.at(0): " << bm_basic_recon->LG.at(0) << endl;
     cout << "bm_basic_recon->LG.at(1): " << bm_basic_recon->LG.at(1) << endl;
     cout << "bm_basic_recon->LG.size(): " << bm_basic_recon->LG.size() << endl;
+
+    Int_t nEntries = BabyMIND_tree->GetEntries();
+    cout << "nEntries: " << nEntries << endl;
+
+    for(Int_t i=0; i<nEntries; i++){
+        if(i%1000==0){
+            cout << "i: " << i << endl;
+            BabyMIND_tree->GetEntry(i);
+            cout << "bm_basic_recon->LG.at(0): " << bm_basic_recon->LG.at(0) << endl;
+            cout << "bm_basic_recon->LG.size(): " << bm_basic_recon->LG.size() << endl;
+        }
+    }
 }

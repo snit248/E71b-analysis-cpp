@@ -14,10 +14,10 @@ void BMHitSearch::findHits(){
     HitNum = 0;
     Int_t lhgSize = lhg.size();
     //cout << "lhg size: " << lhgSize << endl;  // ベクトルサイズの確認
-    Int_t HitNumThreshold = lhgSize/2;
+    Int_t HitNumThreshold = lhgSize/5;
 
     for(Int_t i=0;i<lhgSize;i++){
-        cout << lhg[i] << endl;
+        //cout << lhg[i] << endl;
         if(lhg[i] > 200){
             HitNum++;
         }
