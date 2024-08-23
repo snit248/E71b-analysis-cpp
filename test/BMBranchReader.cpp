@@ -69,8 +69,8 @@ int main(int argc, char *argv[]){
         if(i%1000==0){
             cout << "i: " << i << endl;
             BabyMIND_tree->GetEntry(i);
-            cout << "bm_basic_recon->LG.at(0): " << bm_basic_recon->LG.at(0) << endl;
-            cout << "bm_basic_recon->LG.size(): " << bm_basic_recon->LG.size() << endl;
+            cout << "bm_basic_recon->Lpe.at(0): " << bm_basic_recon->Lpe.at(0) << endl;
+            cout << "bm_basic_recon->Lpe.size(): " << bm_basic_recon->Lpe.size() << endl;
         }
     }
 }

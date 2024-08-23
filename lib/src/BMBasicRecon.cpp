@@ -15,9 +15,15 @@ BMBasicRecon::BMBasicRecon()
   LHG.clear();
   RHG.clear();
   THG.clear();
+  BHG.clear();
   Lgain.clear();
   Rgain.clear();
   Tgain.clear();
+  Bgain.clear();
+  Lpe.clear();
+  Rpe.clear();
+  Tpe.clear();
+  Bpe.clear();
   LG.clear();
   Ltime.clear();
   Ftime.clear();
@@ -26,6 +32,11 @@ BMBasicRecon::BMBasicRecon()
   bunch.clear();
 
   bm_event=-1;
+  year=-1;
+  date=-1;
+  mon=-1;
+  run=-1;
+  hour=-1;
 }
 
 
@@ -43,9 +54,15 @@ void BMBasicRecon::Clear()
   LHG.clear();
   RHG.clear();
   THG.clear();
+  BHG.clear();
   Lgain.clear();
   Rgain.clear();
   Tgain.clear();
+  Bgain.clear();
+  Lpe.clear();
+  Rpe.clear();
+  Tpe.clear();
+  Bpe.clear();
   LG.clear();
   Ltime.clear();
   Ftime.clear();
@@ -54,6 +71,11 @@ void BMBasicRecon::Clear()
   bunch.clear();
 
   bm_event=-1;
+  year=-1;
+  date=-1;
+  mon=-1;
+  run=-1;
+  hour=-1;
 }
 
 void BMBasicRecon::CopyClass(BMBasicRecon* bmbasicrecon1, BMBasicRecon* bmbasicrecon2)

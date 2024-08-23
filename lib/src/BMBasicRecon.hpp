@@ -22,9 +22,15 @@ public:
   vector<double> LHG;
   vector<double> RHG;
   vector<double> THG;
+  vector<double> BHG;
   vector<double> Lgain;
   vector<double> Rgain;
   vector<double> Tgain;
+  vector<double> Bgain;
+  vector<double> Lpe;
+  vector<double> Rpe;
+  vector<double> Tpe;
+  vector<double> Bpe;
   vector<double> LG;
   vector<double> Ltime;
   vector<double> Ftime;
@@ -33,6 +39,11 @@ public:
   vector<double> bunch;
   
   int bm_event;
+  int year;
+  int date;
+  int mon;
+  int run;
+  int hour;
 
   BMBasicRecon();
   ~BMBasicRecon(); 
