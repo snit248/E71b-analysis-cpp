@@ -18,7 +18,7 @@ void BMHitSearch::findHits(){
     //変数の宣言
     Int_t plnNum = 2;
     Int_t hitNum = pln.size();
-    Int_t HGThreshold = 200;
+    Int_t HGThreshold = 400;
     //Int_t HitNumThreshold = 9;
 
     bool hitInPln1 = false;
