@@ -127,18 +127,31 @@ int main(int argc, char *argv[]){
 
             //bmのunixtimeが飛んだ時の処理
             if(bm_unixtime < 100){
-                NentryBM += 2;
+                NentryBM += 1;
 
                 BabyMIND_tree->GetEntry(NentryBM + i);
                 bm_unixtime = bm_bsd->unixtime + i;
-                if(bm_unixtime < 100){
-                    continue;
-                }
+                if(bm_unixtime < 100)continue;
+
+                if(bm_unixtime - trk_unixtime[0] == 0)continue;
                 
-                while(bm_unixtime - trk_unixtime[0] > 0 ){
-                    NentryST++;
-                    tracker_tree->GetEntry(NentryST);
-                    cout << "bm_unixtime: " << bm_unixtime << ", trk_unixtime[0]: " << trk_unixtime[0] << ", bm_unixtime - trk_unixtime[0]: " << bm_unixtime - trk_unixtime[0] << endl;
+                while(bm_unixtime - trk_unixtime[0] > 0 || trk_unixtime[0] - bm_unixtime > 0){
+                    if(bm_unixtime - trk_unixtime[0] > 0){
+                        NentryST++;
+                        tracker_tree->GetEntry(NentryST);
+                        cout << "bm_unixtime: " << bm_unixtime << ", trk_unixtime[0]: " << trk_unixtime[0] << ", bm_unixtime - trk_unixtime[0]: " << bm_unixtime - trk_unixtime[0] << endl;
+                    }
+                    else if(trk_unixtime[0] - bm_unixtime > 0){
+                        NentryBM++;
+                        BabyMIND_tree->GetEntry(NentryBM + i);
+                        bm_unixtime = bm_bsd->unixtime + i;
+                        cout << "bm_unixtime: " << bm_unixtime << ", trk_unixtime[0]: " << trk_unixtime[0] << ", trk_unixtime[0] - bm_unixtime: " << trk_unixtime[0] - bm_unixtime << endl;
+                    }
+                    else{
+                        cout << "bm_unixtime: " << bm_unixtime << ", trk_unixtime[0]: " << trk_unixtime[0] << ", trk_unixtime[0] - bm_unixtime: " << trk_unixtime[0] - bm_unixtime << endl;
+                        cout << "Rematch!!" << endl;
+                        break;
+                    }
                 }
                 output_file_dif << -1 << " " << -1 << " " << -1 << " " << -1 << " " << -1 << " " << -1 << endl;
                 continue;
