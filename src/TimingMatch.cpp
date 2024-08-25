@@ -77,7 +77,6 @@ int main(int argc, char *argv[]){
     BabyMIND_tree->GetEntry(1);
     Int_t start_unixtime = bm_bsd->unixtime;
     cout << "start_unixtime: " << start_unixtime << endl;
-    cout << "bm_basic_recon->LHG.size(): " << bm_basic_recon->LHG.size() << endl; //ここでセグフォ
 
     BabyMIND_tree->GetEntry(nEntriesBM-2);
     Int_t end_unixtime = bm_bsd->unixtime;
@@ -108,42 +107,67 @@ int main(int argc, char *argv[]){
     TString output_file_name_dif;
     Int_t match_counter = 0;
 
+    Int_t Nentry = start_trk_entry + 6;
+
+    Int_t NentryST = Nentry;
+    Int_t NentryBM = Nentry - start_trk_entry;
+
     //時間差-5から5の間でトラッカーとBMの一致を探す
     for(Int_t i=-5;i<=5;i++){
         output_file_name_dif = output_file_name + "_" + i + ".txt";
         ofstream output_file_dif(output_file_name_dif);
 
         //BMの時間内でトラッカーのエントリーを探す
-        for(Int_t j=start_trk_entry;j<=end_trk_entry;j++){
+        while(NentryBM <= end_trk_entry-6){
             //エントリーの読み込み
-            tracker_tree->GetEntry(j);
+            tracker_tree->GetEntry(NentryST);
             //2番目のデータなので+1
-            BabyMIND_tree->GetEntry(j-start_trk_entry+1);
-            bm_unixtime = bm_bsd->unixtime;
+            BabyMIND_tree->GetEntry(NentryBM + i);
+            bm_unixtime = bm_bsd->unixtime + i;
+
+            //bmのunixtimeが飛んだ時の処理
+            if(bm_unixtime < 100){
+                NentryBM += 2;
+
+                BabyMIND_tree->GetEntry(NentryBM + i);
+                bm_unixtime = bm_bsd->unixtime + i;
+                if(bm_unixtime < 100){
+                    continue;
+                }
+                
+                while(bm_unixtime - trk_unixtime[0] > 0 ){
+                    NentryST++;
+                    tracker_tree->GetEntry(NentryST);
+                    cout << "bm_unixtime: " << bm_unixtime << ", trk_unixtime[0]: " << trk_unixtime[0] << ", bm_unixtime - trk_unixtime[0]: " << bm_unixtime - trk_unixtime[0] << endl;
+                }
+                output_file_dif << -1 << " " << -1 << " " << -1 << " " << -1 << " " << -1 << " " << -1 << endl;
+                continue;
+            }
 
             STHitSearch HitSearchST(trk_channels, trk_pe);
             HitSearchST.findHits();
-            cout << "ST HitNum: " << HitSearchST.HitNum << endl;
-            cout << "ST isHit: " << HitSearchST.isHit << endl;
+            //cout << "ST HitNum: " << HitSearchST.HitNum << endl;
+            //cout << "ST isHit: " << HitSearchST.isHit << endl;
 
             BMHitSearch HitSearchBM(bm_basic_recon);
             HitSearchBM.findHits();
-            cout << "BM HitNum: " << HitSearchBM.HitNum << endl;
-            cout << "BM isHit: " << HitSearchBM.isHit << endl;
+            //cout << "BM HitNum: " << HitSearchBM.HitNum << endl;
+            //cout << "BM isHit: " << HitSearchBM.isHit << endl;
 
             if(HitSearchST.isHit && HitSearchBM.isHit){
                 match_counter++;
                 cout << "Match found! " << "trk_unixtime: " << trk_unixtime[0] << " bm_unixtime: " << bm_unixtime << " " << endl;
-                output_file_dif << match_counter << " " << trk_unixtime[0] << " " << j << " " << HitSearchST.HitNum << " " << j-start_trk_entry+i << " " << HitSearchBM.HitNum << endl;
+                output_file_dif << match_counter << " " << trk_unixtime[0] << " " << NentryST << " " << HitSearchST.HitNum << " " << NentryBM + i << " " << HitSearchBM.HitNum << endl;
             }
-
-            if(abs(trk_unixtime[0] - bm_unixtime-i) > 4){
-                cout << "Error: Unixtime is different. tracker: " << trk_unixtime[0] << " BabyMIND: " << bm_unixtime << " " << endl;
-                break;
-            }
+            NentryBM++;
+            NentryST++;
         }
         cout << "Finished " << i << "Total match is " << match_counter << endl;
+
+        //初期値に戻す
         match_counter = 0;
+        NentryST = Nentry;
+        NentryBM = Nentry - start_trk_entry;
         output_file_dif.close();
     }
 
