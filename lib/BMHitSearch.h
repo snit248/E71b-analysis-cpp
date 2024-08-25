@@ -13,15 +13,24 @@
 #include <TFile.h>
 #include <TTree.h>
 
-class BMHitSearch{
+// local include
+#include "BMBasicRecon.hpp"
+
+class BMHitSearch {
     public:
-        BMHitSearch(std::vector<double> bm_lhg);
+        BMHitSearch(BMBasicRecon* bm_basic_recon);
         ~BMHitSearch();
         void findHits();
+
         Int_t HitNum;
         Bool_t isHit;
 
     private:
-        std::vector<double> lhg;
+        std::vector<double> pln;
+        std::vector<double> LHG;
+        std::vector<double> RHG;
+        std::vector<double> THG;
+        std::vector<double> BHG;
 };
+
 #endif

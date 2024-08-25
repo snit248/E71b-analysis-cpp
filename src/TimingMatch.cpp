@@ -121,23 +121,12 @@ int main(int argc, char *argv[]){
             BabyMIND_tree->GetEntry(j-start_trk_entry+1);
             bm_unixtime = bm_bsd->unixtime;
 
-            // ベクトルの各要素を出力 デバッグ
-            /*
-            if (bm_basic_recon->LHG.size() != 0) {
-                for (Int_t k = 0; k < bm_basic_recon->LHG.size(); k++) {
-                    std::cout << "bm_basic_recon->LHG[" << k << "] = " << bm_basic_recon->LHG[k] << std::endl;
-                }
-            } else {
-                std::cerr << "Error: bm_basic_recon->LHG is nullptr or empty." << std::endl;
-            }
-            */
-
             STHitSearch HitSearchST(trk_channels, trk_pe);
             HitSearchST.findHits();
             cout << "ST HitNum: " << HitSearchST.HitNum << endl;
             cout << "ST isHit: " << HitSearchST.isHit << endl;
 
-            BMHitSearch HitSearchBM(bm_basic_recon->LHG);
+            BMHitSearch HitSearchBM(bm_basic_recon);
             HitSearchBM.findHits();
             cout << "BM HitNum: " << HitSearchBM.HitNum << endl;
             cout << "BM isHit: " << HitSearchBM.isHit << endl;
