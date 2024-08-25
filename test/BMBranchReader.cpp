@@ -29,7 +29,7 @@ using namespace std;
 
 int main(int argc, char *argv[]){
     if(argc != 2){
-        cout << "Usage: ./TrackMatch <input_BM_file.root>" << endl;
+        cout << "Usage: ./BMBranchReader <input_BM_file.root>" << endl;
         return 1;
     }
 
