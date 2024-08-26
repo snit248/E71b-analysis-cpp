@@ -2,3 +2,5 @@
 *.root
 *.data
 build/
+output/
+data/
