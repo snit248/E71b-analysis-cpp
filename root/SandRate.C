@@ -109,7 +109,9 @@ if((trig_sec[0]>=1700735626 && trig_sec[0]<=1700898139) || (trig_sec[0]>=1700903
         event.push_back(nhit / daypot);
         yerr.push_back(sqrt(nhit) / daypot);
       } else {
-        event.push_back(0.);
+        //event.push_back(0.);
+        //yerr.push_back(0.);
+        event.push_back(-100.);
         yerr.push_back(0.);
       }
 

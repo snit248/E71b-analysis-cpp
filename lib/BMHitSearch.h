@@ -18,11 +18,13 @@
 
 class BMHitSearch {
     public:
-        BMHitSearch(BMBasicRecon* bm_basic_recon);
+        BMHitSearch(BMBasicRecon* bm_basic_recon, Int_t nPlnInput, Int_t HGThresholdInput);
         ~BMHitSearch();
         void findHits();
 
         Int_t HitNum;
+        Int_t nPln;
+        Int_t HGThreshold;
         Bool_t isHit;
 
     private:

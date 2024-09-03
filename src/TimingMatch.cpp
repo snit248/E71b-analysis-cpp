@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include <vector>
+#include <utility>  // std::pair を使うために必要
 
 //boost include
 #include <boost/log/core.hpp>
@@ -14,6 +15,7 @@
 #include <TGraphErrors.h>
 #include <TGraphAsymmErrors.h>
 #include <TF1.h>
+#include <TH1D.h>
 #include <TString.h>
 #include <TCanvas.h>
 #include <TFile.h>
@@ -31,13 +33,13 @@
 using namespace std;
 
 int main(int argc, char *argv[]){
-    if(argc != 4){
-        cout << "Usage: ./TrackMatch <input_tracker_file.root> <input_BabyMIND_file.root> <output>" << endl;
+    if(argc != 6){
+        cout << "Usage: ./TrackMatch <input_tracker_file.root> <input_BabyMIND_file.root> <output_file_dir> <nPln> <HGThreshold>" << endl;
         return 1;
     }
 
     //変数の宣言
-    const int trk_channels=250;
+    const int trk_channels = 250;
 
     Int_t trk_unixtime[trk_channels];
     Float_t trk_pe[trk_channels];
@@ -52,7 +54,9 @@ int main(int argc, char *argv[]){
     //トラッカーとBMファイルの読み込み
     string input_tracker_file = argv[1];
     string input_BabyMIND_file = argv[2];
-    string output_file = argv[3];
+    string output_file_dir = argv[3];
+    Int_t nPln = atoi(argv[4]);
+    Int_t HGThreshold = atoi(argv[5]);
 
     TFile *tracker_file = new TFile(input_tracker_file.c_str());
     TFile *BabyMIND_file = new TFile(input_BabyMIND_file.c_str());
@@ -60,7 +64,7 @@ int main(int argc, char *argv[]){
     TTree* tracker_tree = (TTree*)tracker_file->Get("tree");
     TTree* BabyMIND_tree = (TTree*)BabyMIND_file->Get("tree");
 
-    TString output_file_name = output_file;
+    //TString output_file_name = output_file;
 
     tracker_tree->SetBranchAddress("UNIXTIME", trk_unixtime);
     tracker_tree->SetBranchAddress("PE", trk_pe);
@@ -112,10 +116,15 @@ int main(int argc, char *argv[]){
     Int_t NentryST = Nentry;
     Int_t NentryBM = Nentry - start_trk_entry;
 
+    Int_t timeDif = 5;
+    std::vector<Int_t> totalMatch;
+
+    TH1D *h = new TH1D("h", "h", 2*timeDif+1, -timeDif, timeDif+1);
+
     //時間差-5から5の間でトラッカーとBMの一致を探す
-    for(Int_t i=-5;i<=5;i++){
-        output_file_name_dif = output_file_name + "_" + i + ".txt";
-        ofstream output_file_dif(output_file_name_dif);
+    for(Int_t i=-timeDif;i<=timeDif;i++){
+        //output_file_name_dif = output_file_name + "_" + i + ".txt";
+        //ofstream output_file_dif(output_file_name_dif);
 
         //BMの時間内でトラッカーのエントリーを探す
         while(NentryBM <= end_trk_entry-6){
@@ -139,21 +148,16 @@ int main(int argc, char *argv[]){
                     if(bm_unixtime - trk_unixtime[0] > 0){
                         NentryST++;
                         tracker_tree->GetEntry(NentryST);
-                        cout << "bm_unixtime: " << bm_unixtime << ", trk_unixtime[0]: " << trk_unixtime[0] << ", bm_unixtime - trk_unixtime[0]: " << bm_unixtime - trk_unixtime[0] << endl;
+                        //cout << "bm_unixtime: " << bm_unixtime << ", trk_unixtime[0]: " << trk_unixtime[0] << ", bm_unixtime - trk_unixtime[0]: " << bm_unixtime - trk_unixtime[0] << endl;
                     }
                     else if(trk_unixtime[0] - bm_unixtime > 0){
                         NentryBM++;
                         BabyMIND_tree->GetEntry(NentryBM + i);
                         bm_unixtime = bm_bsd->unixtime + i;
-                        cout << "bm_unixtime: " << bm_unixtime << ", trk_unixtime[0]: " << trk_unixtime[0] << ", trk_unixtime[0] - bm_unixtime: " << trk_unixtime[0] - bm_unixtime << endl;
-                    }
-                    else{
-                        cout << "bm_unixtime: " << bm_unixtime << ", trk_unixtime[0]: " << trk_unixtime[0] << ", trk_unixtime[0] - bm_unixtime: " << trk_unixtime[0] - bm_unixtime << endl;
-                        cout << "Rematch!!" << endl;
-                        break;
+                        //cout << "bm_unixtime: " << bm_unixtime << ", trk_unixtime[0]: " << trk_unixtime[0] << ", trk_unixtime[0] - bm_unixtime: " << trk_unixtime[0] - bm_unixtime << endl;
                     }
                 }
-                output_file_dif << -1 << " " << -1 << " " << -1 << " " << -1 << " " << -1 << " " << -1 << endl;
+                //output_file_dif << -1 << " " << -1 << " " << -1 << " " << -1 << " " << -1 << " " << -1 << endl;
                 continue;
             }
 
@@ -162,27 +166,36 @@ int main(int argc, char *argv[]){
             //cout << "ST HitNum: " << HitSearchST.HitNum << endl;
             //cout << "ST isHit: " << HitSearchST.isHit << endl;
 
-            BMHitSearch HitSearchBM(bm_basic_recon);
+            BMHitSearch HitSearchBM(bm_basic_recon, nPln, HGThreshold);
             HitSearchBM.findHits();
             //cout << "BM HitNum: " << HitSearchBM.HitNum << endl;
             //cout << "BM isHit: " << HitSearchBM.isHit << endl;
 
             if(HitSearchST.isHit && HitSearchBM.isHit){
                 match_counter++;
-                cout << "Match found! " << "trk_unixtime: " << trk_unixtime[0] << " bm_unixtime: " << bm_unixtime << " " << endl;
-                output_file_dif << match_counter << " " << trk_unixtime[0] << " " << NentryST << " " << HitSearchST.HitNum << " " << NentryBM + i << " " << HitSearchBM.HitNum << endl;
+                //cout << "Match found! " << "trk_unixtime: " << trk_unixtime[0] << " bm_unixtime: " << bm_unixtime << " " << endl;
+                //output_file_dif << match_counter << " " << trk_unixtime[0] << " " << NentryST << " " << HitSearchST.HitNum << " " << NentryBM + i << " " << HitSearchBM.HitNum << endl;
+                h->Fill(i);
             }
             NentryBM++;
             NentryST++;
         }
         cout << "Finished " << i << "Total match is " << match_counter << endl;
+        totalMatch.push_back(match_counter);
 
         //初期値に戻す
         match_counter = 0;
         NentryST = Nentry;
         NentryBM = Nentry - start_trk_entry;
-        output_file_dif.close();
+        //output_file_dif.close();
     }
+
+    ///ヒストグラム描写///
+    TCanvas *c = new TCanvas("c", "c");
+    c->SetGrid();
+
+    h->Draw();
+    c->SaveAs((output_file_dir + "/nPln_" + std::to_string(nPln) + "_HGThreshold_" + std::to_string(HGThreshold) + "_hist.png").c_str());
 
     return 0;
 }
