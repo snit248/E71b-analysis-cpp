@@ -64,7 +64,7 @@ int main(int argc, char *argv[]){
     TTree* tracker_tree = (TTree*)tracker_file->Get("tree");
     TTree* BabyMIND_tree = (TTree*)BabyMIND_file->Get("tree");
 
-    //TString output_file_name = output_file;
+    TString output_file_name = TString::Format("../../output/timedif/Pln_%d_HGThreshold_%d_Timedif", nPln, HGThreshold);
 
     tracker_tree->SetBranchAddress("UNIXTIME", trk_unixtime);
     tracker_tree->SetBranchAddress("PE", trk_pe);
@@ -123,8 +123,8 @@ int main(int argc, char *argv[]){
 
     //時間差-5から5の間でトラッカーとBMの一致を探す
     for(Int_t i=-timeDif;i<=timeDif;i++){
-        //output_file_name_dif = output_file_name + "_" + i + ".txt";
-        //ofstream output_file_dif(output_file_name_dif);
+        output_file_name_dif = output_file_name + "_" + i + ".txt";
+        ofstream output_file_dif(output_file_name_dif);
 
         //BMの時間内でトラッカーのエントリーを探す
         while(NentryBM <= end_trk_entry-6){
@@ -157,7 +157,7 @@ int main(int argc, char *argv[]){
                         //cout << "bm_unixtime: " << bm_unixtime << ", trk_unixtime[0]: " << trk_unixtime[0] << ", trk_unixtime[0] - bm_unixtime: " << trk_unixtime[0] - bm_unixtime << endl;
                     }
                 }
-                //output_file_dif << -1 << " " << -1 << " " << -1 << " " << -1 << " " << -1 << " " << -1 << endl;
+                output_file_dif << -1 << " " << -1 << " " << -1 << " " << -1 << " " << -1 << " " << -1 << endl;
                 continue;
             }
 
@@ -174,7 +174,7 @@ int main(int argc, char *argv[]){
             if(HitSearchST.isHit && HitSearchBM.isHit){
                 match_counter++;
                 //cout << "Match found! " << "trk_unixtime: " << trk_unixtime[0] << " bm_unixtime: " << bm_unixtime << " " << endl;
-                //output_file_dif << match_counter << " " << trk_unixtime[0] << " " << NentryST << " " << HitSearchST.HitNum << " " << NentryBM + i << " " << HitSearchBM.HitNum << endl;
+                output_file_dif << match_counter << " " << trk_unixtime[0] << " " << NentryST << " " << HitSearchST.HitNum << " " << NentryBM + i << " " << HitSearchBM.HitNum << endl;
                 h->Fill(i);
             }
             NentryBM++;
@@ -187,7 +187,7 @@ int main(int argc, char *argv[]){
         match_counter = 0;
         NentryST = Nentry;
         NentryBM = Nentry - start_trk_entry;
-        //output_file_dif.close();
+        output_file_dif.close();
     }
 
     ///ヒストグラム描写///
