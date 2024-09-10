@@ -45,6 +45,7 @@ int main(int argc, char *argv[]){
     Float_t trk_pe[trk_channels];
 
     Int_t bm_unixtime;
+    Int_t bm_bunch;
 
     //BMブランチ（枝）
     BMBasicRecon *bm_basic_recon = new BMBasicRecon();
