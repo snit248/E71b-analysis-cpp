@@ -27,7 +27,7 @@ void BMHitSearch::findHits(){
     std::vector<bool> hitInPln(nPln, false);
 
     //上流でのヒットがあるかどうか
-    for(Int_t j=1; j<=nPln; j++){
+    for(Int_t j=1; j<=18; j++){
         for(Int_t i=0;i<hitNum;i++){
             if(pln[i] == j){
                 if((LHG[i] >= HGThreshold && RHG[i] >= HGThreshold) || (THG[i] >= HGThreshold && BHG[i] >= HGThreshold)){

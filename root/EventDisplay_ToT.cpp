@@ -98,10 +98,12 @@ void EventDisplay_ToT(){
     mergetree->GetEntry(ientry);
     Int_t countOverThreshold = 0;
         for(Int_t index = 0; index < nindex; index++) {
-            if((pe[index] > PE_threshold) && (unixtime[index] > 1701650383)) {
+            //if((pe[index] > PE_threshold) && (unixtime[index] > 1701650570)) {
+            //if((pe[index] > PE_threshold) && (unixtime[index] > 1701650383)) {
+            if((pe[index] > PE_threshold) && (unixtime[index] > 1701650831)) {
               countOverThreshold++;
             }
-            else if(((leadtime[index]-trailtime[index]) > ToT_threshold) && (unixtime[index] > 1701650383)) {
+            else if(((leadtime[index]-trailtime[index]) > ToT_threshold) && (unixtime[index] > 1701650831)) {
             //if(pe[index] > PE_threshold && unixtime[index] > 1701650383) {
             //if(pe[index] > PE_threshold && unixtime[index]>unixTime24HoursAgo-9000) {
             //if(pe[index] > PE_threshold) {
@@ -200,7 +202,20 @@ void EventDisplay_ToT(){
             }
           }
         }else{
-          cerr << "No ADC data and Multi hit TDC data has no meaning..." << endl;
+          for(Int_t index=0; index<250; index++){
+            
+            scint->SetFillColor(19);
+            if(pe[index] <= PE_threshold && (leadtime[index]-trailtime[index]) > ToT_threshold) scint->SetFillColor(kPurple);
+
+            if(view[index]==0){
+              c->cd(1);
+              scint->DrawBox(offsetz[pln[index]], -500+32*ch[index]+offsety[pln[index]], offsetz[pln[index]]+3, -500+32*ch[index]+24+offsety[pln[index]]);
+            }
+            else if(view[index]==1){
+              c->cd(2);
+              scint->DrawBox(offsetz[pln[index]]+20, 500-32*ch[index]-offsetx[pln[index]], offsetz[pln[index]]+23, 500-32*ch[index]-24-offsetx[pln[index]]);
+            }
+          }
         }
         
         c->cd(1);
@@ -211,6 +226,8 @@ void EventDisplay_ToT(){
       //}
       //if(counter==10000){break;} //条件を満たすもので何番目のデータを使うか
       //if(unixtime[0]==1700769744){break;}
+      c->SaveAs(Form("../output/eventdisplay/ST/ED_ToT_ID%d_%d).png", ientry, unixtime[0]));
+
       c->Update();
       gSystem->ProcessEvents();
       std::cout << "Input q to quit." << std::endl;

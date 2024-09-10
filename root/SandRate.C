@@ -143,7 +143,7 @@ if((trig_sec[0]>=1700735626 && trig_sec[0]<=1700898139) || (trig_sec[0]>=1700903
   g->SetMarkerStyle(20);
   gStyle->SetTimeOffset(-788918400);
   g->GetYaxis()->SetTitleOffset(0.9);
-  g->GetYaxis()->SetRangeUser(0., 1.0); // Adjusted to show both datasets
+  g->GetYaxis()->SetRangeUser(0.7, 1.0); // Adjusted to show both datasets
   g->GetXaxis()->SetTimeDisplay(1);
   g->GetXaxis()->SetTimeFormat("%m/%d");
   g->GetXaxis()->SetRangeUser(rangestart[subrun], rangeend[subrun]);
@@ -162,6 +162,6 @@ TText *tex = new TText();
 TString TotalPot = Form("Total POT: %.3e", totalpot);
 tex->DrawTextNDC(0.45, 0.6, TotalPot);
 
-c1->Print("../output/event_rate_daybyday_e71b.jpg");
+c1->Print("../output/event_rate_daybyday_e71b_07.jpg");
 
 }

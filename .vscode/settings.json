@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "SandRate.C": "cpp"
+        "SandRate.C": "cpp",
+        "ostream": "cpp"
     }
 }
