@@ -6,6 +6,8 @@ void NoiseTriggerGraph() {
   const Int_t nindex = 250;
   const Float_t PE_threshold = 2.5;
   const Float_t ToT_threshold = 40;
+  const Int_t hitNumThreshold = 3;
+  TString filename = Form("../output/TDCFlagCountHistogram_PEth_%f_ToTth_%f_hitNumTh_%d.png", PE_threshold, ToT_threshold, hitNumThreshold);
   
   // TrackerIDごとにtdcflag==0をカウントするためのヒストグラムを作成
   Int_t trackerID_bins = 270; // 1000 IDごとに分けるため、100ビン
@@ -45,7 +47,7 @@ void NoiseTriggerGraph() {
       }
     }
 
-    if (countOverThreshold >= 2) {
+    if (countOverThreshold >= hitNumThreshold) {
         totalEvents++;
       Int_t tdcflag = 0;  // 初期化
 
@@ -77,7 +79,7 @@ void NoiseTriggerGraph() {
   hist->GetXaxis()->SetTitle("TrackerID (0-100000, 1000 ID per bin)");
   hist->GetYaxis()->SetTitle("Number of Events with tdcflag == 0");
   hist->Draw();
-  c1->SaveAs("../output/TDCFlagCountHistogram.png");
+  c1->SaveAs(filename);
 
   delete c1;
   delete hist;

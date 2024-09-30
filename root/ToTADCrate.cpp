@@ -25,7 +25,8 @@ void ToTADCrate(){
 
     //Change this value
     Int_t ToTThreshold = 40;
-    Float_t peThreshold = 3.5;
+    Float_t peThreshold = 2.5;
+    Int_t hitNumThreshold = 4;
 
     tree->SetBranchAddress("ADC", adc);
     tree->SetBranchAddress("LEADTIME", leadtime);
@@ -48,10 +49,10 @@ void ToTADCrate(){
                 ToTHitCounter++;
             }
         }
-        if (ADCHitCounter > 1){
+        if (ADCHitCounter >= hitNumThreshold){
             ADCentries++;
         }
-        if(ToTHitCounter > 1){
+        if(ToTHitCounter >= hitNumThreshold && ADCHitCounter != 0){
             ToTentries++;
         }
         ADCHitCounter = 0;
@@ -61,6 +62,5 @@ void ToTADCrate(){
     cout << "ADC entries: " << ADCentries << endl;
     cout << "ToT entries: " << ToTentries << endl;
     cout << "ToT/ADC: " << (double)ToTentries/ADCentries << endl;
-    cout << "ToT/(ADC+NoADCbutToT): " << (double)ToTentries/(ADCentries+1008) << endl;
 
 }

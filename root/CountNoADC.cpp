@@ -25,6 +25,7 @@ void CountNoADC() {
 
   Int_t noTDCflagCount = 0;  // tdcflagが立たなかったイベントのカウンタ
   Int_t totalEvents = 0;
+  Int_t hitNumThreshold = 3;
 
   for (Int_t ientry = 0; ientry < mergetree->GetEntries(); ientry++) {
     mergetree->GetEntry(ientry);
@@ -38,7 +39,7 @@ void CountNoADC() {
       }
     }
 
-    if (countOverThreshold >= 2) {
+    if (countOverThreshold >= 3) {
         totalEvents++;
       Int_t tdcflag = 0;  // 初期化
 
