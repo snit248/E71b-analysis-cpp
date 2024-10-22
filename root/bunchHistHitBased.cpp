@@ -25,8 +25,9 @@ void bunchHistHitBased(){
 
     //Change this value
     Int_t ToTThreshold = 40;
-    Float_t peThreshold = 2.5;
+    Float_t peThreshold = 3.5;
     Int_t hitNumThreshold = 4;
+    std::vector<Int_t> firstHitChannels;
 
     tree->SetBranchAddress("ADC", adc);
     tree->SetBranchAddress("LEADTIME", leadtime);
@@ -41,14 +42,18 @@ void bunchHistHitBased(){
 
     TH1D *hBunch = new TH1D("hBunch", "Bunch", 200, 0, 4096);
     TH1D *hBunchFirst = new TH1D("hBunchFirst", "BunchFirst", 200, 0, 4096);
+    TH1D *hBunchNoFirst = new TH1D("hBunchNoFirst", "BunchNoFirst", 200, 0, 4096);
     TH1D *hBunchMulti = new TH1D("hBunchMulti", "BunchMulti", 200, 0, 4096);
     TH1D *hBunchNoADC = new TH1D("hBunchNoADC", "BunchNoADC", 200, 0, 4096);
 
     for(Int_t i=0;i<nentry;i++){
+        firstHitChannels.clear();
         tree->GetEntry(i);
         for(Int_t j=0;j<250;j++){
             if(pe[j] > peThreshold){
-                ADCHitCounter++;
+                ADCHitCounter++;//1ヒット目のTDCマスクしてみる
+                firstHitChannels.push_back(j);
+                std::cout << "firstHitChannels: " << j << std::endl;
             }
             if((leadtime[j] - trailtime[j]) > ToTThreshold && pe[j] <= peThreshold){
                 ToTHitCounter++;
@@ -58,9 +63,13 @@ void bunchHistHitBased(){
             ADCentries++;
             for(Int_t k=0; k<250; k++){
                 if((leadtime[k] - trailtime[k]) > ToTThreshold){
-                    cout << leadtime[k] << endl;
+                    //cout << leadtime[k] << endl;
                     hBunch->Fill(leadtime[k]);
                     hBunchFirst->Fill(leadtime[k]);
+                    if (std::find(firstHitChannels.begin(), firstHitChannels.end(), k) == firstHitChannels.end()) {
+                        std::cout << "not firstHitChannels: " << k << std::endl;
+                        hBunchNoFirst->Fill(leadtime[k]);
+                    }
                 }
             }
         }
@@ -68,7 +77,7 @@ void bunchHistHitBased(){
             ToTentries++;
             for(Int_t k=0; k<250; k++){
                 if((leadtime[k] - trailtime[k]) > ToTThreshold){
-                    cout << leadtime[k] << endl;
+                    //cout << leadtime[k] << endl;
                     hBunch->Fill(leadtime[k]);
                     hBunchMulti->Fill(leadtime[k]);
                 }
@@ -78,7 +87,7 @@ void bunchHistHitBased(){
             ToTentries++;
             for(Int_t k=0; k<250; k++){
                 if((leadtime[k] - trailtime[k]) > ToTThreshold){
-                    cout << leadtime[k] << endl;
+                    //cout << leadtime[k] << endl;
                     hBunchNoADC->Fill(leadtime[k]);
                 }
             }
@@ -96,6 +105,7 @@ void bunchHistHitBased(){
     TCanvas *c2 = new TCanvas("c2", "c2", 800, 600);
     TCanvas *c3 = new TCanvas("c3", "c3", 800, 600);
     TCanvas *c4 = new TCanvas("c4", "c4", 800, 600);
+    TCanvas *c5 = new TCanvas("c5", "c5", 800, 600);
 
     c1->cd();
     c1->SetGrid();
@@ -120,5 +130,11 @@ void bunchHistHitBased(){
     c4->SetLogy();
     hBunchNoADC->Draw();
     c4->SaveAs("../output/bunchHistHitBasedNoADC.png");
+
+    c5->cd();
+    c5->SetGrid();
+    c5->SetLogy();
+    hBunchNoFirst->Draw();
+    c5->SaveAs("../output/bunchHistHitBasedNoFirst.png");
 
 }
